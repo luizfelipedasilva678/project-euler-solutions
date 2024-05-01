@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdint.h>
 #define MAX 4000000
 
 int is_even(int n)
