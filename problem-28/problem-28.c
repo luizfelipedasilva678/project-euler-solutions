@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <inttypes.h>
 
+// TODO: Refactor this code.
+
 #define N 1001
 
 int main(void)
