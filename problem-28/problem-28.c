@@ -9,12 +9,12 @@
 int main(void)
 {
     size_t i, j;
-    uint32_t **matrix = malloc(sizeof(int **) * N), col, row, n = 1;
+    uint32_t **matrix = malloc(sizeof(uint32_t **) * N), col, row, n = 1;
     uint64_t sum = 0;
 
     for (i = 0; i < N; i++)
     {
-        matrix[i] = malloc(sizeof(int *) * N);
+        matrix[i] = malloc(sizeof(uint32_t *) * N);
     }
 
     col = N / 2;
