@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include<inttypes.h>
 
+// Need to be improved
+
 #define LIMIT 100000
 
 uint64_t triangular_numbers[LIMIT];
