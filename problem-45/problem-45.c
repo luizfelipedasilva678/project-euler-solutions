@@ -14,7 +14,6 @@ int cmpfunc(const void * a, const void * b) {
 
 uint64_t find_next_triangular_pentagonal_hexagonal_number() {
     size_t i, j, k;
-    uint64_t *is_equal_triangular, *is_equal_pentagonal;
 
     for(i = 285; i < LIMIT; i++) {
         for(j = 165; j < LIMIT; j++) {
