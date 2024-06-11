@@ -1,64 +1,59 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
 
-#define LIMIT 100000
-
-int cmpfunc( const void *a, const void *b) {
-  return *(char*)a - *(char*)b;
-}
-
-int value_exists_in_array(int n, size_t idx_products,int arr[]) {
-    size_t i;
-
-    for(i = 0; i < idx_products; i++) {
-        if(arr[i] == n) return 1;
-    }
-
-    return 0;
-}
+#define LIMIT 10000
 
 int digits(int n) {
     return floor(log10(abs(n))) + 1;
 }
 
-int is_pandigital_product(int a, int b) {
-    char str[10];
-    snprintf(str, 10, "%d%d%d", a, b, a*b);
-    qsort(str, 9, sizeof(char), cmpfunc);
-
-    return strcmp(str, "123456789") == 0;
+int cmpfunc( const void *a, const void *b) {
+  return *(char*)a - *(char*)b;
 }
 
+
 int main(void) {
-    int products[LIMIT] = {0};
-    int *item, product, sum, digits_cnt;
-    size_t i, j, idx_products;
+    int numbers[LIMIT] = {0}, digits_cnt, idx_numbers, offset, n, largest_n;
+    char buff[10], temp[10], *p;
+    size_t i, j, k;
 
-    idx_products = 0;
-    for(i = 0; i <= LIMIT; i++) {
-        for (j = 0; j <= LIMIT; j++) {
-            digits_cnt = digits(i) + digits(j) + digits(i * j);
+    largest_n = 0;
+    for(i = 1; i < LIMIT; i++) {
+        digits_cnt = 0;
+        idx_numbers = 0;
+        for(j = 1; j < LIMIT; j++) {
+            if(digits_cnt > 9) break;
+
+            digits_cnt += digits(i * j);
+            numbers[idx_numbers] = i * j;
+            idx_numbers++;
+
             if(digits_cnt == 9) {
-                if(is_pandigital_product(i, j) == 1) {
-                    product = i * j;
+                offset = 0;
+                p = buff;
+                n = 0;
 
-                    if(value_exists_in_array(product, idx_products, products) == 0) {
-                        products[idx_products] = product;
-                        idx_products++;
+                for(k = 0; k < idx_numbers; k++) {
+                    offset += snprintf(p + offset, 10 - offset, "%d", numbers[k]);
+                }
+
+                strcpy(temp, buff);
+                qsort(temp, 9, sizeof(char), cmpfunc);
+
+                if(strcmp(temp, "123456789") == 0) {
+                    sscanf(buff, "%d", &n);
+
+                    if(n > largest_n) {
+                        largest_n = n;
                     }
                 }
             }
         }
     }
 
-    sum = 0;
-    for(i = 0; i < idx_products; i++) {
-        sum += products[i];
-    }
-
-    printf("Answer: %d \n", sum);
+    printf("%d ", largest_n);
 
     return 0;
 }
+
